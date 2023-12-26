@@ -1,11 +1,13 @@
 from english_words import get_english_words_set
+import subprocess
 import sys
 
 # Finds the longest word that is defined as sequential letters alteranting sides of the keyboard
-def longesterAlternating():
-    if len(sys.argv) != 2:
-        return
-    my_dictionary = sys.argv[1]
+def longesterAlternating(my_dictionary):
+
+    # Get number of lines in the dictionary, and print it out
+    num_lines = subprocess.run(["awk", 'END {print "Number of words in the file:", NR}', "/../../usr/share/dictd/" + my_dictionary + ".index"])
+
     # Get words from a specified dictionary
     english_words_set = getWordList(my_dictionary)
     # I sort it so that I always get the same answer
@@ -71,7 +73,10 @@ def getWordList(dictionary):
     return word_list
 
 def main():
-    print("Longest alternating word in this dictionary: " + longesterAlternating())
+    for line in sys.stdin:
+        if 'q' == line.rstrip():
+            break
+        print("Longest alternating word in this dictionary: " + longesterAlternating(line.rstrip()))
 
 if __name__ == "__main__":
     main()
