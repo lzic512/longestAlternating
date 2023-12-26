@@ -6,7 +6,10 @@ import sys
 def longesterAlternating(my_dictionary):
 
     # Get number of lines in the dictionary, and print it out
-    num_lines = subprocess.run(["awk", 'END {print "Number of words in the file:", NR}', "/../../usr/share/dictd/" + my_dictionary + ".index"])
+    subprocess.run(["awk", 'END {print "Number of words in the file:", NR}', "/../../usr/share/dictd/" + my_dictionary + ".index"])
+
+    # Number of lines in the file
+    num_lines = 0
 
     # Get words from a specified dictionary
     english_words_set = getWordList(my_dictionary)
@@ -23,6 +26,7 @@ def longesterAlternating(my_dictionary):
     right = ['y', 'u', 'i', 'o', 'p', 'h', 'j', 'k', 'l', 'n', 'm', 'Y', 'U', 'I', 'O', 'P', 'H', 'J', 'K', 'L', 'N', 'M']
     # Go through each word in the set
     for curr_word in my_set:
+        num_lines = num_lines + 1
         # If the length of the word is less than the length of the longest so far, just skip it
         if len(curr_word) < len(longest):
             continue
@@ -59,6 +63,7 @@ def longesterAlternating(my_dictionary):
                 # We are essentially comparing the built word to the completed word itself, to see if we have made it though the entire word
                 if len(temp) == len(curr_word):
                     longest = temp
+    print("Number of lines is: " + str(num_lines))
     # Just return the longest word
     return longest
 
