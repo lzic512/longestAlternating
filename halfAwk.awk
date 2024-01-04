@@ -5,11 +5,7 @@ BEGIN {
 
 {
         if (length($1) > longest && ($1 ~ pattern1 || $1 ~ pattern2)){
-	    longest = length($1);
-            longestWord = $1;
+		print length($1), " ", $1
         }
 }
 
-END {
-    print "Longest alternating word:", longestWord;
-}
