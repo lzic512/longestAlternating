@@ -12,3 +12,5 @@ echo $(time awk -f awkProgram.awk /../../usr/share/dictd/devil.index)
 echo "Third one"
 awk -f halfAwk.awk /../../usr/share/dictd/devil.index | sort -r  | head -n 1 | cat
 
+echo "Fourth one"
+awk -f awkProgram2.awk /../../usr/share/dictd/devil.index | cat
